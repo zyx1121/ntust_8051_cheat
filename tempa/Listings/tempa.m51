@@ -1,0 +1,41 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    11/15/2022  19:54:09  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\tempa.obj TO .\Objects\tempa PRINT (.\Listings\tempa.m51) RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\tempa.obj (TEMPA)
+
+
+LINK MAP OF MODULE:  .\Objects\tempa (TEMPA)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0002H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\tempa (TEMPA)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        TEMPA
+  C:0002H         SYMBOL        MAIN
+  C:0000H         LINE#         2
+  -------         ENDMOD        TEMPA
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0002H BYTE ( 0%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=2
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

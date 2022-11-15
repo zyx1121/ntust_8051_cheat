@@ -1,0 +1,32 @@
+A51 MACRO ASSEMBLER  TEMPA                                                                11/15/2022 19:54:09 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\tempa.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE tempa.a51 SET(SMALL) DEBUG PRINT(.\Listings\tempa.lst) OBJECT(.\Objects
+                      \tempa.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG     00H
+0000 8000              2     JMP     MAIN
+                       3     
+0002                   4     MAIN:
+                       5     
+                       6     
+                       7     END
+A51 MACRO ASSEMBLER  TEMPA                                                                11/15/2022 19:54:09 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+MAIN . . . . . . .  C ADDR   0002H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

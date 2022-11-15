@@ -1,0 +1,44 @@
+		ORG		00H
+		MOV		SCON,#50H
+		MOV		TMOD,#20H
+		MOV		TH1,#(256-(28800/9600))
+		MOV		TL1,#(256-(28800/9600))
+		SETB	TR1
+		
+START:	MOV		DPTR,#PW
+		MOV		R0,#3
+
+LOOP:	JNB		RI,$
+		CLR		RI
+		
+		MOV		R1,SBUF
+		MOV		SBUF,R1
+		JNB		TI,$
+		CLR		TI
+		
+		MOV		A,R0
+		DEC		A
+		MOVC	A,@A+DPTR
+		CJNE	A,SBUF,START
+		DJNZ	R0,LOOP
+		
+		JNB		RI,$
+		CLR		RI
+		
+		MOV		R1,SBUF
+		MOV		SBUF,R1
+		JNB		TI,$
+		CLR		TI
+		
+		MOV		DPTR,#TABLE
+		MOV		A,SBUF
+		SUBB	A,#30H
+		MOVC	A,@A+DPTR
+		MOV		P0,A
+		
+		JMP		START
+		
+PW:		DB		'C','B','A'
+TABLE:	DB		3FH, 06H, 5BH, 4FH, 66H, 6DH, 7CH, 07H, 7FH, 67H
+	
+		END

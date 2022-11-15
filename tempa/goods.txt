@@ -1,0 +1,76 @@
+; start
+        ORG     00H ; RESET
+        JMP     MAIN
+        ORG     03H ; INT0
+        ORG     0BH ; TF0
+        ORG     13H ; INT1
+        ORG     1BH ; TF1
+        ORG     23H ; UART
+MAIN:   ORG     50H
+
+; timer0 1s init
+        MOV	    TMOD,#01H
+        MOV     TH0,#HIGH(65536-46080)
+        MOV	    TL0,#LOW(65536-46080)
+        SETB    TR0
+; timer0 1s interrupt
+        MOV     TH0,#HIGH(65536-46080)
+        MOV	    TL0,#LOW(65536-46080)
+        INC	    R5
+        CJNE    R5,#20,EXIT
+        MOV     R5,#0
+EXIT:   RETI
+
+; interrupt init
+        SETB    IE.7 ; global enable
+        SETB    IE.0 ; enable  INT0(EX0)
+        SETB    IE.1 ; enable  TF0(ET0)
+        SETB    IE.2 ; enable  INT1(EX1)
+        SETB    IE.3 ; enable  TF1(ET1)
+        SETB    IE.4 ; enable  URAT(ES)
+
+        SETB    TCON.0 ; let INT0 is negative edge-triggered
+        SETB    TCON.2 ; let INT1 is negative edge-triggered
+
+; uart init
+        MOV	    SCON,#50H
+        MOV     TMOD,#20H
+        MOV	    TH1,#(256-(28800/9600))
+        MOV	    TL1,#(256-(28800/9600))
+        SETB    TR1
+; uart ti
+        MOV	    SBUF,A
+        JNB	    TI,$
+        CLR	    TI
+; uart ri
+        JNB     RI,$
+        CLR	    RI
+        MOV	    A,SBUF
+
+; btn   
+        SETB    P2.5
+BTN0:   JNB     P2.5,$
+        CALL 	  DELAY6
+        JNB     P2.5,BTN0
+
+BTN1:   JB      P2.5,$
+        CALL    DELAY6
+        JB      P2.5,BTN1
+
+DELAY6: MOV 	  R6,#100
+DELAY7: MOV 	  R7,#230
+        DJNZ 	  R7,$
+        DJNZ 	  R6,DELAY7
+        RET
+
+; movc        
+        MOV 	  R0,#0
+        MOV 	  DPTR,#L7S
+         MOV 	  A,R0
+        MOVC 	  A,@A+DPTR
+
+; l7s           0   1   2   3   4   5   6   7   8   9   A   b   C   d   E   F
+L7S:    DB      3FH,06H,5BH,4FH,66H,6DH,7CH,07H,7FH,67H,77H,7CH,39H,5EH,79H,71H
+
+; end
+        END

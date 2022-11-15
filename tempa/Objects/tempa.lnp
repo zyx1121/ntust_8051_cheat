@@ -1,0 +1,3 @@
+".\Objects\tempa.obj" 
+TO ".\Objects\tempa" 
+PRINT(".\Listings\tempa.m51") RAMSIZE(256) 
